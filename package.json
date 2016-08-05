@@ -1,0 +1,18 @@
+{
+  "name": "d3-autocomplete",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "budo --css styles.css test.js"
+  },
+  "style": "styles.css",
+  "browserify": {},
+  "devDependencies": {
+    "budo": "^8.1.0"
+  },
+  "dependencies": {
+    "auto-abort": "^2.0.0",
+    "d3-utils": "^1.0.0",
+    "object-equal": "^1.0.0",
+    "raf": "^3.2.0"
+  }
+}
