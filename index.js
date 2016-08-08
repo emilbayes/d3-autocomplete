@@ -66,10 +66,10 @@ module.exports = function (attrs, queryCallback) {
     on,
 
     add,
-    remove,
-    removeAll,
+    delete: del,
+    clear,
 
-    clear
+    value
   }
 
   function completeQuery () {
@@ -154,17 +154,21 @@ module.exports = function (attrs, queryCallback) {
   }
 
   function add (obj, before) {
-    if (Array.isArray(obj)) suggestionsData.splice.apply(suggestionsData, indexOf(before), obj)
+    if (Array.isArray(obj)) suggestionsData.splice.apply(suggestionsData, [indexOf(before), 0].concat(obj))
     suggestionsData.splice(indexOf(before), obj)
+    raf(render)
   }
 
-  function remove (obj) {
+  function del (obj) {
     var idx = indexOf(suggestionsData, obj)
 
-    if (idx > -1) suggestionsData.splice(idx, 1)
+    if (idx > -1) {
+      suggestionsData.splice(idx, 1)
+      raf(render)
+    }
   }
 
-  function removeAll () {
+  function clear () {
     suggestionsData = []
     raf(render)
   }
@@ -174,8 +178,8 @@ module.exports = function (attrs, queryCallback) {
     emitter.change(d)
   }
 
-  function clear () {
-    $input.property('value', '')
+  function value (val) {
+    $input.property('value', val)
   }
 }
 

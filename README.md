@@ -46,10 +46,10 @@ Returns:
   on(event, listener), // Listen for either `change` or `error` events
 
   add(suggestion), // Add a suggestion
-  remove(suggestion), // Remove a suggestion
-  removeAll(), // Remove all suggestions
+  delete(suggestion), // Remove a suggestion
+  clear(), // Remove all suggestions
 
-  clear() // Clear input field
+  value(value) // Set value of input field
 }
 ```
 
