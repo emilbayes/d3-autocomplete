@@ -1,7 +1,6 @@
 section.autocomplete {
   position: relative;
   display: inline-block;
-  outline: none;
 }
 
 ol.suggestions {
@@ -9,7 +8,6 @@ ol.suggestions {
   box-sizing: border-box;
 
   position: absolute;
-  z-index: 999;
 
   display: block;
   width: 100%;

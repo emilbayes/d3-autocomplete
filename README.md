@@ -2,10 +2,12 @@
 
 > Small autocomplete written using D3
 
+**PRs welcome!** 
+
 ## Install
 
 ```sh
-npm install ...
+npm install d3-autocomplete
 ```
 
 ## Usage
@@ -36,9 +38,28 @@ document.body.appendChild(autocomplete.element)
 
 ### `createAutocomplete(attrs, queryCallback)`
 
-#### `attrs`
+Returns: ```js
+{
+  element, // The element to add to the DOM
+  on, // Listen for either `change` or `error` events
 
-#### `queryCallback`
+  add, // Add a suggestion
+  remove, // Remove a suggestion
+  removeAll, // Remove all suggestions
+
+  clear // Clear input field
+}
+```
+
+#### `attrs`
+Type: `Object`
+
+Various attributes to change on the elements created. See the source
+
+#### `queryCallback(query, callback)`
+Type: `Function`
+
+Called when requesting completions for `query`. Pass back results through `callback(err, result)`
 
 ## License
 

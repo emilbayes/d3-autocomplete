@@ -1,11 +1,10 @@
 {
   "name": "d3-autocomplete",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "test": "budo --css styles.css test.js"
   },
   "style": "styles.css",
-  "browserify": {},
   "devDependencies": {
     "budo": "^8.1.0"
   },
@@ -14,5 +13,23 @@
     "d3-utils": "^1.0.0",
     "object-equal": "^1.0.0",
     "raf": "^3.2.0"
-  }
+  },
+  "description": "Small autocomplete written using D3",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilbayes/d3-autocomplete.git"
+  },
+  "keywords": [
+    "d3",
+    "autocomplete",
+    "dom",
+    "query"
+  ],
+  "author": "Emil Bay <github@tixz.dk>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emilbayes/d3-autocomplete/issues"
+  },
+  "homepage": "https://github.com/emilbayes/d3-autocomplete#readme"
 }

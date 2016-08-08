@@ -24,7 +24,7 @@ function indexOf (arr, obj) {
 module.exports = function (attrs, queryCallback) {
   var emitter = d3.dispatch('change', 'error')
 
-  var selectedIndex = -1
+  var selectedIndex = 0
   var suggestionsData = []
   var hideSuggestionsTimer
 
@@ -67,7 +67,9 @@ module.exports = function (attrs, queryCallback) {
 
     add,
     remove,
-    removeAll
+    removeAll,
+
+    clear
   }
 
   function completeQuery () {
@@ -79,7 +81,7 @@ module.exports = function (attrs, queryCallback) {
       if (err) return emitter.error(err)
 
       $suggestions.style('display', null)
-      selectedIndex = -1
+      selectedIndex = 0
 
       suggestionsData = results
 
@@ -89,7 +91,7 @@ module.exports = function (attrs, queryCallback) {
 
   function render () {
     $suggestions.selectAll('li')
-      .data(suggestionsData)
+      .data(suggestionsData, JSON.stringify)
     .call(hook(
       function (enter) {
         enter.append('li')
@@ -119,45 +121,31 @@ module.exports = function (attrs, queryCallback) {
 
   function keyboardRouter () {
     d3.event.stopPropagation()
+    var keyCode = d3.event.keyCode
+    if (keyCode === KEY_CODES.ENTER) {
+      change(suggestionsData[selectedIndex])
+      hideSuggestions()
+      return
+    }
 
-    switch (d3.event.keyCode) {
-      case KEY_CODES.ENTER:
-        change(suggestionsData[selectedIndex > -1 ? selectedIndex : 0])
+    if (keyCode === KEY_CODES.ESC) {
+      selectedIndex = 0
+      hideSuggestions()
+      return
+    }
 
-        hideSuggestions()
-        break
+    if (keyCode === KEY_CODES.UP) {
+      d3.event.preventDefault()
+      selectedIndex = mod(selectedIndex - 1, suggestionsData.length)
+      raf(render)
+      return
+    }
 
-      case KEY_CODES.ESC:
-        selectedIndex = -1
-        hideSuggestions()
-        break
-
-      case KEY_CODES.UP:
-      case KEY_CODES.DOWN:
-        // Keyboard navigation of suggestions
-        d3.event.preventDefault()
-        var oldIndex = selectedIndex
-        var newIndex = -1
-
-        if (d3.event.keyCode === KEY_CODES.UP) {
-          if (oldIndex === -1) {
-            newIndex = suggestionsData.length - 1
-          }
-          if (oldIndex > 0) {
-            newIndex = oldIndex - 1
-          }
-        }
-        if (d3.event.keyCode === KEY_CODES.DOWN) {
-          if (oldIndex === -1) {
-            newIndex = 0
-          }
-          if (oldIndex < suggestionsData.length - 1) {
-            newIndex = oldIndex + 1
-          }
-        }
-
-        selectedIndex = newIndex
-        raf(render)
+    if (keyCode === KEY_CODES.DOWN) {
+      d3.event.preventDefault()
+      selectedIndex = mod(selectedIndex + 1, suggestionsData.length)
+      raf(render)
+      return
     }
   }
 
@@ -185,4 +173,12 @@ module.exports = function (attrs, queryCallback) {
     $input.property('value', d.label)
     emitter.change(d)
   }
+
+  function clear () {
+    $input.property('value', '')
+  }
+}
+
+function mod (n, p) {
+  return ((n % p) + p) % p
 }
