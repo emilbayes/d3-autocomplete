@@ -2,7 +2,7 @@
 
 > Small autocomplete written using D3
 
-**PRs welcome!** 
+**PRs welcome!**
 
 ## Install
 
@@ -38,16 +38,18 @@ document.body.appendChild(autocomplete.element)
 
 ### `createAutocomplete(attrs, queryCallback)`
 
-Returns: ```js
+Returns:
+
+```js
 {
   element, // The element to add to the DOM
-  on, // Listen for either `change` or `error` events
+  on(event, listener), // Listen for either `change` or `error` events
 
-  add, // Add a suggestion
-  remove, // Remove a suggestion
-  removeAll, // Remove all suggestions
+  add(suggestion), // Add a suggestion
+  remove(suggestion), // Remove a suggestion
+  removeAll(), // Remove all suggestions
 
-  clear // Clear input field
+  clear() // Clear input field
 }
 ```
 
