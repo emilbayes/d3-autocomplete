@@ -7,11 +7,6 @@ var autocomplete = createAutocomplete({}, function (query, cb) {
       {label: 'Bar', gender: 'F'}
     ].filter(n => n.label.toLowerCase().includes(query.toLowerCase())))
   }, 500)
-
-  console.log([
-    {label: 'Foo', gender: 'M'},
-    {label: 'Bar', gender: 'F'}
-  ].filter(n => n.label.toLowerCase().includes(query.toLowerCase())))
 })
 
 autocomplete.on('change', d => console.log(d))

@@ -154,8 +154,8 @@ module.exports = function (attrs, queryCallback) {
   }
 
   function add (obj, before) {
-    if (Array.isArray(obj)) suggestionsData.splice.apply(suggestionsData, [indexOf(before), 0].concat(obj))
-    suggestionsData.splice(indexOf(before), obj)
+    if (Array.isArray(obj)) suggestionsData.splice.apply(suggestionsData, [indexOf(suggestionsData, before), 0].concat(obj))
+    else suggestionsData.splice(indexOf(suggestionsData, before), 0, obj)
     raf(render)
   }
 
