@@ -26,8 +26,7 @@ ol.suggestions li {
   cursor: pointer;
 }
 
-ol.suggestions li.search-highlight,
-ol.suggestions li:hover {
+ol.suggestions li.search-highlight {
   background: #eee;
 }
 

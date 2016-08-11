@@ -96,6 +96,10 @@ module.exports = function (attrs, queryCallback) {
       function (enter) {
         enter.append('li')
             .on('click', change)
+            .on('mouseover', function (_, i) {
+              selectedIndex = i
+              raf(render)
+            })
             .text(ƒ('label'))
       },
       function (update) {
