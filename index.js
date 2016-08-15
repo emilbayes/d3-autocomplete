@@ -48,6 +48,7 @@ module.exports = function (attrs, queryCallback) {
       .attr({
         type: 'search',
         name: 'autocomplete',
+        autocomplete: 'off',
         placeholder: attrs.placeholder || 'Search...'
       })
       .on('focus', completeQuery)
