@@ -2,9 +2,9 @@
   "name": "d3-autocomplete",
   "version": "3.1.0",
   "scripts": {
-    "test": "budo --css styles.css test.js"
+    "test": "budo --css style.css test.js"
   },
-  "style": "styles.css",
+  "style": "style.css",
   "devDependencies": {
     "budo": "^8.1.0"
   },
