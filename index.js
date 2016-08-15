@@ -27,6 +27,7 @@ module.exports = function (attrs, queryCallback) {
   var selectedIndex = 0
   var suggestionsData = []
   var hideSuggestionsTimer
+  var isOpen
 
   var element = document.createElement('section')
   var $elm = d3.select(element)
@@ -60,7 +61,7 @@ module.exports = function (attrs, queryCallback) {
 
   $suggestions
       .classed('suggestions', true)
-      .style('display', 'none')
+  close()
 
   return {
     element: element,
@@ -69,6 +70,9 @@ module.exports = function (attrs, queryCallback) {
     add: add,
     delete: del,
     clear: clear,
+
+    close: close,
+    open: open,
 
     value: value
   }
@@ -81,7 +85,7 @@ module.exports = function (attrs, queryCallback) {
       $elm.classed('is-loading', false)
       if (err) return emitter.error(err)
 
-      $suggestions.style('display', null)
+      open()
       selectedIndex = 0
 
       suggestionsData = results
@@ -119,7 +123,7 @@ module.exports = function (attrs, queryCallback) {
     if (hideSuggestionsTimer) return
 
     hideSuggestionsTimer = setTimeout(function () {
-      $suggestions.style('display', 'none')
+      close()
       hideSuggestionsTimer = null
     }, 100)
   }
@@ -128,14 +132,18 @@ module.exports = function (attrs, queryCallback) {
     d3.event.stopPropagation()
     var keyCode = d3.event.keyCode
     if (keyCode === KEY_CODES.ENTER) {
-      change(suggestionsData[selectedIndex])
-      hideSuggestions()
+      if (isOpen) {
+        change(suggestionsData[selectedIndex])
+        d3.event.preventDefault()
+        close()
+      }
+
       return
     }
 
     if (keyCode === KEY_CODES.ESC) {
       selectedIndex = 0
-      hideSuggestions()
+      close()
       return
     }
 
@@ -176,6 +184,16 @@ module.exports = function (attrs, queryCallback) {
   function clear () {
     suggestionsData = []
     raf(render)
+  }
+
+  function close () {
+    isOpen = false
+    $suggestions.style('display', 'none')
+  }
+
+  function open () {
+    isOpen = true
+    $suggestions.style('display', null)
   }
 
   function change (d) {
