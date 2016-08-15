@@ -77,7 +77,7 @@ module.exports = function (attrs, queryCallback) {
     $elm.classed('is-loading', true)
 
     queryCallback($input.property('value'), function (err, results) {
-      $elm.classed('is-loading', true)
+      $elm.classed('is-loading', false)
       if (err) return emitter.error(err)
 
       $suggestions.style('display', null)
