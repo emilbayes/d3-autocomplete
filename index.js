@@ -63,14 +63,14 @@ module.exports = function (attrs, queryCallback) {
       .style('display', 'none')
 
   return {
-    element,
-    on,
+    element: element,
+    on: on,
 
-    add,
+    add: add,
     delete: del,
-    clear,
+    clear: clear,
 
-    value
+    value: value
   }
 
   function completeQuery () {
