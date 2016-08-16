@@ -73,6 +73,7 @@ module.exports = function (attrs, queryCallback) {
 
     close: close,
     open: open,
+    toggle: toggle,
 
     value: value
   }
@@ -194,6 +195,12 @@ module.exports = function (attrs, queryCallback) {
   function open () {
     isOpen = true
     $suggestions.style('display', null)
+  }
+
+  function toggle () {
+    if (isOpen) return close()
+
+    return open()
   }
 
   function change (d) {
