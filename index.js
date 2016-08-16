@@ -151,6 +151,7 @@ module.exports = function (attrs, queryCallback) {
     if (keyCode === KEY_CODES.UP) {
       d3.event.preventDefault()
       selectedIndex = mod(selectedIndex - 1, suggestionsData.length)
+      open()
       raf(render)
       return
     }
@@ -158,6 +159,7 @@ module.exports = function (attrs, queryCallback) {
     if (keyCode === KEY_CODES.DOWN) {
       d3.event.preventDefault()
       selectedIndex = mod(selectedIndex + 1, suggestionsData.length)
+      open()
       raf(render)
       return
     }
