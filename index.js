@@ -52,12 +52,12 @@ module.exports = function (attrs, queryCallback) {
         autocomplete: 'off',
         placeholder: attrs.placeholder || 'Search...'
       })
-      .on('focus', completeQuery)
-      .on('blur', hideSuggestions)
-      .on('input', completeQuery)
-      .on('keydown', keyboardRouter)
-      .on('keyup', function () { d3.event.stopPropagation() })
-      .on('keypress', function () { d3.event.stopPropagation() })
+      .on('focus.autocomplete', completeQuery)
+      .on('blur.autocomplete', hideSuggestions)
+      .on('input.autocomplete', completeQuery)
+      .on('keydown.autocomplete', keyboardRouter)
+      .on('keyup.autocomplete', function () { d3.event.stopPropagation() })
+      .on('keypress.autocomplete', function () { d3.event.stopPropagation() })
 
   $suggestions
       .classed('suggestions', true)
@@ -100,8 +100,8 @@ module.exports = function (attrs, queryCallback) {
     .call(hook(
       function (enter) {
         enter.append('li')
-            .on('click', change)
-            .on('mouseover', function (_, i) {
+            .on('click.autocomplete', change)
+            .on('mouseover.autocomplete', function (_, i) {
               selectedIndex = i
               raf(render)
             })
