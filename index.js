@@ -75,7 +75,7 @@ module.exports = function (attrs, queryCallback) {
     open: open,
     toggle: toggle,
 
-    value: value
+    query: query
   }
 
   function completeQuery () {
@@ -212,7 +212,9 @@ module.exports = function (attrs, queryCallback) {
     emitter.change(d)
   }
 
-  function value (val) {
+  function query (val) {
+    if (val == null) return input.value
+
     $input.property('value', val)
   }
 }
