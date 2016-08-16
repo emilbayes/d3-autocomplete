@@ -190,11 +190,13 @@ module.exports = function (attrs, queryCallback) {
   }
 
   function close () {
+    if (!isOpen) return
     isOpen = false
     $suggestions.style('display', 'none')
   }
 
   function open () {
+    if (isOpen) return
     isOpen = true
     $suggestions.style('display', null)
   }
