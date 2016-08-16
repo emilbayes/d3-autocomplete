@@ -53,7 +53,7 @@ module.exports = function (attrs, queryCallback) {
         placeholder: attrs.placeholder || 'Search...'
       })
       .on('focus.autocomplete', completeQuery)
-      .on('blur.autocomplete', hideSuggestions)
+      .on('blur.autocomplete', onBlur)
       .on('input.autocomplete', completeQuery)
       .on('keydown.autocomplete', keyboardRouter)
       .on('keyup.autocomplete', function () { d3.event.stopPropagation() })
@@ -120,11 +120,12 @@ module.exports = function (attrs, queryCallback) {
     ))
   }
 
-  function hideSuggestions (delta) {
+  function onBlur () {
     if (hideSuggestionsTimer) return
 
     hideSuggestionsTimer = setTimeout(function () {
       close()
+      if (input.value.length === 0) change({label: null})
       hideSuggestionsTimer = null
     }, 100)
   }
