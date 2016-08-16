@@ -49,7 +49,11 @@ Returns:
   delete(suggestion), // Remove a suggestion
   clear(), // Remove all suggestions
 
-  value(value) // Set value of input field
+  open(), // Open suggestions
+  close(), // Close suggestions
+  toggle(), // Toggle suggestions
+
+  query([value]) // Set/get query of autocomplete
 }
 ```
 
