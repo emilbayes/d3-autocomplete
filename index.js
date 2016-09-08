@@ -110,6 +110,7 @@ module.exports = function (attrs, queryCallback) {
       },
       function (update) {
         update
+            .order()
             .classed('search-highlight', function (d, i) {
               return i === selectedIndex
             })
