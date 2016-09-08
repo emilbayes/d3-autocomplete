@@ -1,6 +1,6 @@
 {
   "name": "d3-autocomplete",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "scripts": {
     "test": "budo --css style.css test.js"
   },
